@@ -24,18 +24,18 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 
-	@GetMapping("/employee/{id}")
+	@GetMapping("/api/v1/employee/{id}")
 	private Employee getStudent(@PathVariable("id") int id) {
 		return employeeService.getEmployeeById(id);
 	}
 
-	@PostMapping("/employee")
+	@PostMapping("/api/v1/employee")
 	private ResponseEntity<?> saveEmployee(@RequestBody Employee employee) {
 		Employee savedEmployee = employeeService.saveOrUpdate(employee);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);
 	}
 
-	@GetMapping("/employee/tax-statement/{id}")
+	@GetMapping("/api/v1/employee/tax-statement/{id}")
 	private ResponseEntity<?> getEmployeeTax(@PathVariable("id") int id) {
 		EmployeeTaxStatement taxAndCess = employeeService.calculateTaxAndCess(id);
 		return ResponseEntity.status(HttpStatus.OK).body(taxAndCess);
